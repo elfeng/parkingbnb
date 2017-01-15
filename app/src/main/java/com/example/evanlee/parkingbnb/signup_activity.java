@@ -8,11 +8,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.common.util.concurrent.FutureCallback;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
 import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
+import com.microsoft.windowsazure.mobileservices.authentication.MobileServiceAuthenticationProvider;
+import com.microsoft.windowsazure.mobileservices.authentication.MobileServiceUser;
 import com.microsoft.windowsazure.mobileservices.http.ServiceFilterResponse;
 import com.microsoft.windowsazure.mobileservices.table.TableOperationCallback;
 
@@ -30,11 +34,16 @@ public class signup_activity extends AppCompatActivity {
         setContentView(R.layout.signup_activity);
 
         final Button signupButton = (Button) findViewById(R.id.btn_signup);
+        final Button signIn_msft = (Button) findViewById(R.id.msft_signin);
         signupButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 signUp();
             }
-
+        });
+        signIn_msft.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                 authenticate();
+            }
         });
     }
 
@@ -84,13 +93,13 @@ public class signup_activity extends AppCompatActivity {
             public void onCompleted(Person entity, Exception exception, ServiceFilterResponse response) {
                 if (exception == null) {
                     // Insert succeeded
+                    System.out.println("success");
                 } else {
                     // Insert failed
+                    System.out.println("fail");
                 }
             }
         });
-
-
 
 
         new android.os.Handler().postDelayed(
@@ -169,6 +178,24 @@ public class signup_activity extends AppCompatActivity {
         }
 
         return valid;
+    }
+
+    private void authenticate() {
+        // Login using the Microsoft provider.
+
+        ListenableFuture<MobileServiceUser> mLogin = mClient.login(MobileServiceAuthenticationProvider.MicrosoftAccount);
+
+        Futures.addCallback(mLogin, new FutureCallback<MobileServiceUser>() {
+            @Override
+            public void onFailure(Throwable exc) {
+                Log.e(TAG, "Error");
+            }
+            @Override
+            public void onSuccess(MobileServiceUser user) {
+                Log.e(TAG, "Success");
+
+            }
+        });
     }
 
 }
