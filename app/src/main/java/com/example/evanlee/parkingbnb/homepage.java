@@ -1,7 +1,10 @@
 package com.example.evanlee.parkingbnb;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -11,7 +14,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class homepage extends FragmentActivity implements OnMapReadyCallback {
+public class homepage extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
 
@@ -29,6 +32,9 @@ public class homepage extends FragmentActivity implements OnMapReadyCallback {
         mapFragment.getMapAsync(this);
     }
 
+    public void goToNextActivity(View view){
+//        startActivity(new Intent(homepage.this, YourNewActivity.class));
+    }
 
     /**
      * Manipulates the map once available.

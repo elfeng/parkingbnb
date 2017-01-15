@@ -1,10 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
-<fragment android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mapFragment4"
-    tools:context=".homepage"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:name="com.google.android.gms.maps.SupportMapFragment"/>
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="375dp"
+        android:id="@+id/mapFragment4"
+        tools:context=".homepage"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="Search"
+        android:layout_width="138dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="125dp"
+        android:layout_marginRight="120dp"
+        android:id="@+id/button2"
+        android:onClick="goToNextActivity"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp" />
+
+    <com.appyvet.rangebar.RangeBar
+        android:id="@+id/rangebar"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        custom:tickStart="00"
+        custom:tickInterval="1"
+        custom:tickEnd="24"
+        android:layout_marginLeft="16dp"
+        android:elevation="100dp"
+        android:layout_marginRight="16dp"
+        android:layout_above="@+id/textView2"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="11:59 PM"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"
+        android:orientation="horizontal"
+        android:layout_below="@+id/rangebar"
+        android:layout_alignStart="@+id/rangebar" />
+
+    <TextView
+        android:text="12:01 AM"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView2"
+        android:orientation="horizontal"
+        android:layout_alignTop="@+id/button2"
+        android:layout_alignEnd="@+id/rangebar" />
+
+    <TextView
+        android:text="Please choose your parking timeframe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:id="@+id/textView3"
+        android:layout_alignTop="@+id/rangebar"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>
+
