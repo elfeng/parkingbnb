@@ -38,6 +38,8 @@ public class signup_activity extends AppCompatActivity {
         // Validate stuff
         if(!validate()){
             failedSignUp();
+            final Button signupButton = (Button) findViewById(R.id.btn_signup);
+            signupButton.setEnabled(true);
             return;
         }
 
