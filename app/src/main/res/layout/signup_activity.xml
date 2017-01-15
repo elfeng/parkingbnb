@@ -113,6 +113,15 @@
                 android:text="Create Account"
 
         />
+        <android.support.v7.widget.AppCompatButton
+                android:id="@+id/msft_signin"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:padding="12dp"
+                android:text="Sign in with Microsoft Account"
+
+        />
 
         <TextView android:id="@+id/link_login"
                   android:layout_width="fill_parent"
