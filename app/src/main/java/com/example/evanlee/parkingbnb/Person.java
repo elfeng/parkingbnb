@@ -3,7 +3,10 @@ package com.example.evanlee.parkingbnb;
 /**
  * Created by evanlee on 1/15/17.
  */
-public class TodoItem {
+public class Person {
     public String Id;
-    public String Text;
+    public String Name;
+    public String Email;
+    public String Pass;
+
 }

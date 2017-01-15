@@ -32,23 +32,6 @@ public class homepage extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-
-        try {
-            mClient = new MobileServiceClient("https://parkingbnb.azurewebsites.net", this);
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
-        }
-        final TodoItem item = new TodoItem();
-        item.Text = "Awesome item";
-        mClient.getTable(TodoItem.class).insert(item, new TableOperationCallback<TodoItem>() {
-            public void onCompleted(TodoItem entity, Exception exception, ServiceFilterResponse response) {
-                if (exception == null) {
-                    // Insert succeeded
-                } else {
-                    // Insert failed
-                }
-            }
-        });
     }
 
 

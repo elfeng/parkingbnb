@@ -12,11 +12,17 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
+import com.microsoft.windowsazure.mobileservices.http.ServiceFilterResponse;
+import com.microsoft.windowsazure.mobileservices.table.TableOperationCallback;
+
+import java.net.MalformedURLException;
 import java.util.regex.Pattern;
 
 
 public class signup_activity extends AppCompatActivity {
     private static final String TAG = "signupactivity";
+    MobileServiceClient mClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +58,40 @@ public class signup_activity extends AppCompatActivity {
         signup_proDi.show();
 
         // TODO: implement Azure signup and send feedback
+        final TextView _nameText = (TextView) findViewById(R.id.input_name);
+        final TextView _emailText = (TextView) findViewById(R.id.input_email);
+        final TextView _passwordText = (TextView) findViewById(R.id.input_password);
+
+        String in_name = _nameText.getText().toString();
+        String in_email = _emailText.getText().toString();
+        String in_password = _passwordText.getText().toString();
+
+        //add to Azure dataBase
+
+        // Establish connection
+        try {
+            mClient = new MobileServiceClient("https://parkingbnb.azurewebsites.net", this);
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        }
+        // TODO: Change to ood practice
+        final Person p = new Person();
+        p.Name = in_name;
+        p.Email = in_email;
+        p.Pass = in_password;
+        // Write to the SQLite
+        mClient.getTable(Person.class).insert(p, new TableOperationCallback<Person>() {
+            public void onCompleted(Person entity, Exception exception, ServiceFilterResponse response) {
+                if (exception == null) {
+                    // Insert succeeded
+                } else {
+                    // Insert failed
+                }
+            }
+        });
+
+
+
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
@@ -90,6 +130,10 @@ public class signup_activity extends AppCompatActivity {
         signupButton.setEnabled(true);
     }
 
+    /**
+     * Validate if the entries given are syntactically valid
+     * @return
+     */
     public boolean validate(){
         boolean valid = true;
         Pattern p = Pattern.compile("[^a-zA-Z0-9]");
